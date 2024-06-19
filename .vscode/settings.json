@@ -1,0 +1,15 @@
+{
+    "git.ignoreLimitWarning": true,
+    "files.associations": {
+        "*.html": "html",
+        "*.htm": "html",
+        "*.jinja": "jinja-html",
+        "*.djhtml": "django-html"
+    },
+    "emmet.includeLanguages": {
+        "django-html": "html",
+        "jinja-html": "html"
+    }
+}
+
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0f0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container{
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 400px;
+                width: 100%;
+            }
+            h2{
+                margin-bottom: 20px;
+            }
+            label {
+                display: block;
+                margin-bottom: 5px;
+            }
+            input{
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            button{
+                width: 100%;
+                padding: 10px;
+                background-color: #28a745;
+                border: none;
+                color: #fff;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #218838;
+            }
+            .messages {
+                margin-bottom: 20px;
+            }
+            .messages p {
+                color: red;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Sign UP</h2>
+            <form method="POST" action="{% url 'signup' %}">
+                {% csrf_token %}
+
+                <div class="messages">
+                    {% for message in messages %}
+                         <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                <label for="username"> Username:</label>
+                <input type="text" name="username" id="username" required>
+                
+                <label for="email"> Email:</label>
+                <input type="email" name="email" id="email" required><br>
+
+                <label for="password1">Password:</label>
+                <input type="password" name="password1" id="password1" required><br>
+
+                <label for="password2">Confirm Password:</label>
+                <input type="password" name="password2" id="password2" required><br>
+                
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account?<a href="{% url 'login' %}">Login</a></p>
+
+        </div>
+    </body>
+</html>

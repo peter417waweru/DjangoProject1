@@ -1,0 +1,82 @@
+{%  extends 'main.html'%}
+<style>
+    /* Add some basic styling for better appearance */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+    }
+    h2 {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .messages {
+        margin-bottom: 20px;
+    }
+    .messages p {
+        color: red;
+    }
+</style>
+{%  block content %}
+
+{% if page == 'login' %}
+<div class="container">
+    <h2>Login</h2>
+    <form method="POST" action ="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="messages">
+            {% for message in messages %}
+               <p>{{ message }}</p>
+            {%endfor%}
+
+        </div>
+    
+        <label for="username"> Username: </label>
+        <input type="text" name="Username" id="username" placeholder="Enter Username" ><br>
+    
+        <label for="password">Password:</label>
+        <input type="Password" name="Password" id="password" placeholder="Enter Password"><br>
+    
+       <button type="submit">Login</button>
+    </form>
+
+    <p>Not signed up?</p>
+    <a href="{% url 'signup' %}">Sign Up</a>
+</div>
+{% endif %}
+
+
+{% endblock %}

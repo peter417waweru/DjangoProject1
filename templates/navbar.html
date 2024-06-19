@@ -1,0 +1,61 @@
+<!-- As a link -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Django Project</title>
+    <style>
+        .navbar-custom {
+            background-color: #343a40;
+        }
+        .navbar-brand, .nav-link, .search-bar input[type="text"] {
+            color: #ffffff;
+        }
+        .search-bar input[type="text"] {
+            border: none;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">MySite</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home'%}">Home</a>
+                    </li>
+                    <li class="nav-item" href="#">
+                        {% if user.is_authenticated %}
+                           <a class="nav-link"  href="{% url 'logout' %}">Logout</a>  <!-- Logout button if user is logged in -->
+                        {% else %}
+                           <a class="nav-link" href="{% url 'login' %}">Login</a>  <!-- Login button if user is not logged in -->
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0 search-bar" method="GET" action="{% url 'home' %}">
+                    <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search Room..." aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Content Block -->
+    <div class="container mt-4">
+        {% block content %}
+           {% if user.is_authenticated %}
+                <p> hello {{request.user}}</p>
+            {%endif%}
+        {% endblock content %}
+    </div>
+    
+</body>
+</html>
